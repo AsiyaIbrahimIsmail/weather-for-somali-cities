@@ -53,4 +53,4 @@ This app uses the [OpenWeatherMap](https://openweathermap.org/api) free tier:
 - **Current weather:** `GET /data/2.5/weather?q={city}&units=metric&appid={key}`
 - **5-day forecast:** `GET /data/2.5/forecast?q={city}&units=metric&appid={key}`
 
-Before using the app, replace `YOUR_OPENWEATHERMAP_API_KEY` in `js/main.js` with your own OpenWeatherMap API key. Do not commit the real key. Because browser code is public, use a backend proxy to protect the key in production.
+Before using the app, add your OpenWeatherMap API key to `js/config.local.js`. This local file is ignored by Git; use `js/config.example.js` as a template. Never commit your real key. Browser code is public, so use a backend proxy to protect the key in production.

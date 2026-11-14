@@ -2,9 +2,16 @@
 // Weather App - Enhanced Features
 // ============================================
 
-const API_KEY = "YOUR_OPENWEATHERMAP_API_KEY";
+const API_KEY = window.OPENWEATHERMAP_API_KEY || "";
 const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 const FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast";
+
+function getApiKey() {
+  if (!API_KEY || API_KEY === "YOUR_OPENWEATHERMAP_API_KEY") {
+    throw new Error("Add your OpenWeatherMap API key to js/config.local.js.");
+  }
+  return API_KEY;
+}
 
 // Toast Notification System
 function showToast(message, type = "info") {
@@ -55,7 +62,7 @@ async function getWeather() {
     </div>`;
 
   try {
-    const res = await fetch(`${BASE_URL}?q=${city}&units=metric&appid=${API_KEY}`);
+    const res = await fetch(`${BASE_URL}?q=${city}&units=metric&appid=${getApiKey()}`);
     if (!res.ok) throw new Error("City not found. Please check the spelling.");
 
     const data = await res.json();
@@ -132,7 +139,7 @@ async function getWeatherForecast() {
     </div>`;
 
   try {
-    const res = await fetch(`${FORECAST_URL}?q=${city}&units=metric&appid=${API_KEY}`);
+    const res = await fetch(`${FORECAST_URL}?q=${city}&units=metric&appid=${getApiKey()}`);
     if (!res.ok) throw new Error("City not found");
 
     const data = await res.json();
